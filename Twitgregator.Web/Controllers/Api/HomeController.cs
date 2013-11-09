@@ -37,19 +37,26 @@ namespace Twitgregator.Web.Controllers.Api
         public HttpResponseMessage Get(string screenNames)
         {
             TwitterPostListViewModel vm = null;
+            //Names are URL encoded on the client side
             string decoded = HttpUtility.UrlDecode(screenNames);
+            
+            //Get a list of names out of the submitted form input
             List<string> names = parseNames(decoded);
+            
             if(null == names)
                 return HttpErrorResponseWrapper.create(this, "Error retrieving tweets.").getResponse();
 
             try
             {
+                //Create a Twitter data source
                 TwitterRESTAPIRepository repo = new TwitterRESTAPIRepository();
-                //List<TwitterPost> posts = (List<TwitterPost>)repo.FindAll("pay_by_phone", DateTime.Now.AddDays(-14));
-                //ViewBag.Posts = posts;
-
+                
                 TwitterViewModelFactory factory = new TwitterViewModelFactory();
+                
+                //Get tweets for each account going back two weeks from today
                 object[] args = new object[] { names, DateTime.Now.AddDays(-14) };
+                
+                //Get a ViewModel to return to the client side for Backbone
                 vm = (TwitterPostListViewModel)factory.createViewModel(repo, args);
             }
             catch (Exception ex)
