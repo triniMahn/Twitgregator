@@ -1,0 +1,34 @@
+﻿@using Twitgregator.Posts.Stats.Framework;
+@using Twitgregator.Posts.Framework;
+@{
+    
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<div style="width: 70%">
+    <ul>
+        @foreach (IUserWebPost post in ViewBag.ViewModel.Posts)
+        { 
+            <li>@post.created_at_datetime<br />
+                @post.text<br />
+                <hr />
+            </li> 
+        }
+    </ul>
+</div>
+<div style="width: 30%">
+    @foreach (UserWebPostStats stats in ViewBag.ViewModel.Stats)
+    {
+        <p>@stats.Description</p>
+        <ul>
+            @foreach (UserWebPostStat stat in stats.Stats)
+            {
+                <li>
+                    @stat.UserID (@stat.Count)
+                </li>
+            }
+        </ul>
+    }
+</div>

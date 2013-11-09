@@ -1,0 +1,73 @@
+﻿
+@{
+    
+    ViewBag.Title = "Index";
+}
+
+<!--START Debug Row-->
+    <div id="divDebugRow" class="row">
+        <div id="divDebug" class="col-md-10 alert alert-info"></div>
+    </div>
+    <!-- END Debug Row -->
+
+    <!-- START Alert Row -->
+    <div id="divAlertRow" class="row">
+        <div id="divAlert" class="col-md-10"></div>
+    </div>
+    <!-- END Alert Row -->
+
+    <div id="divControlRow" class="row">
+        <div id="divControls" class="col-md-10">
+            
+        </div>
+    </div>    
+
+    <!-- START Action Window -->
+    <div id="actionWindow" class="row">
+        <div class="col-md-10">
+            <!--Backbone view are rendered inside this div-->
+            <div id="actionWindowContainer" style=""></div>
+        </div>
+    </div>
+    <!-- END Action Window-->
+
+<!--START Templates -->
+<script type="text/template" id="control-template">
+<p>Enter Twitter Handles: <input type="text" class="handleInput" value="" autofocus="autofocus"/>&nbsp;&nbsp;<input class="btnGetTweets btn btn-default btn-primary" type="button" value="Get Tweets" /></p>
+</script>
+
+<script type="text/template" id="tweetData-template">
+<div class="row">
+    <div class="col-md-6">
+        <p style="display:<%=(Posts.length==0)?'block':'none'%>">No data available</p>
+        
+        <ul>
+        <% _.each(Posts, function(post){ %>
+            <li>
+                <%=post.UserID%><br />
+                <%=post.created_at_datetime%><br />
+                <%=post.text%><br />
+                <hr />
+            </li>
+            
+        <% }); %>
+        </ul>
+    </div>
+    <div class="col-md-4">
+        <% _.each(Stats, function(s){ %>
+            <h4>Description: <%=s.Description%></h4>
+            <h4>For user: <%=s.UserName%></h4>
+            <ul>
+            <% _.each(s.Stats, function(si){ %>
+                <li>
+                    <%=si.UserID%>&nbsp;(<%=si.Count%>)
+                    <hr />
+                </li>
+            <% }); %>
+            </ul>
+        <% }); %>
+    </div>
+</div>
+</script>
+
+<!--END Templates -->
