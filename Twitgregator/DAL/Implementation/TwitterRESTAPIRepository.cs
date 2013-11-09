@@ -16,6 +16,9 @@ using Twitgregator.Posts.Implementation;
 
 namespace Twitgregator.DAL.Implementation
 {
+    //*** Could have probably used an open-source framework to pull tweets.
+    //*** However, I couldn't find a library that works well with the new API, and
+    //*** I wanted to learn about using the API, anyhow.
     public class TwitterAuthData
     {
         public enum AuthDataError
