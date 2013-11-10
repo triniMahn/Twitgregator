@@ -21,9 +21,7 @@ namespace Twitgregator.Web.Controllers
         public ActionResult Index()
         {
             TwitterRESTAPIRepository repo = new TwitterRESTAPIRepository();
-            //List<TwitterPost> posts = (List<TwitterPost>)repo.FindAll("pay_by_phone", DateTime.Now.AddDays(-14));
-            //ViewBag.Posts = posts;
-
+            
             TwitterViewModelFactory factory = new TwitterViewModelFactory();
             object[] args = new object[] { "pay_by_phone", DateTime.Now.AddDays(-14) };
             TwitterPostListViewModel vm = (TwitterPostListViewModel)factory.createViewModel(repo, args);

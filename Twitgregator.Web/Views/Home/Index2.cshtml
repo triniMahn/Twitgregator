@@ -41,12 +41,12 @@
     <div class="col-md-6">
         <p style="display:<%=(Posts.length==0)?'block':'none'%>">No data available</p>
         
-        <ul>
+        <ul class="list-unstyled">
         <% _.each(Posts, function(post){ %>
             <li>
-                <%=post.UserID%><br />
-                <%=post.created_at_datetime%><br />
-                <%=post.text%><br />
+                <strong><%=post.UserID%></strong><br />
+                <em><%=post.created_at_datetime%></em><br />
+                <blockquote><div><%=post.text%><br /></div></blockquote>
                 <hr />
             </li>
             
@@ -54,10 +54,12 @@
         </ul>
     </div>
     <div class="col-md-4">
+        <h3>Stats</h3>
         <% _.each(Stats, function(s){ %>
+            <div class="well">
             <h4>Description: <%=s.Description%></h4>
             <h4>For user: <%=s.UserName%></h4>
-            <ul>
+            <ul class="list-unstyled">
             <% _.each(s.Stats, function(si){ %>
                 <li>
                     <%=si.UserID%>&nbsp;(<%=si.Count%>)
@@ -65,6 +67,7 @@
                 </li>
             <% }); %>
             </ul>
+            </div>
         <% }); %>
     </div>
 </div>
